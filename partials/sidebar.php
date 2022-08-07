@@ -46,7 +46,7 @@
   
   <!-- Nav Item -->
   <li class="nav-item">
-    <a class="nav-link" href="#">
+    <a class="nav-link" href="subkriteria.php">
       <i class="fas fa-fw fa-cog"></i>
       <span>Subkriteria</span></a
     >
