@@ -55,7 +55,7 @@
   <div class="sidebar-heading">Analisis</div>
   <!-- Nav Item -->
   <li class="nav-item">
-    <a class="nav-link" href="#">
+    <a class="nav-link" href="./topsis.php">
       <i class="fas fa-thumbtack"></i>
       <span>Rekomendasi</span></a
     >
