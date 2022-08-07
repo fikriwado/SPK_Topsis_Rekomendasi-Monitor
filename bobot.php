@@ -47,10 +47,10 @@
                       <tbody>
                         <tr>
                           <th scope="row" class="text-left">BOBOT</th>
-                          <td>5</td>
+                          <td>4</td>
                           <td>4</td>
                           <td>5</td>
-                          <td>4</td>
+                          <td>5</td>
                           <td>4</td>
                           <td>5</td>
                         </tr>
