@@ -61,7 +61,10 @@
                       <tbody>
                         <?php
                             $sql    = "SELECT * FROM monitor";
-                            $result = mysqli_query($koneksi, $sql);
+                            $result = mysqli_query(
+															$koneksi,
+															$sql
+														);
 
 														while($data = $result->fetch_assoc()) {
 															echo "
