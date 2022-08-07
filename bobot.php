@@ -36,29 +36,29 @@
                       <thead>
                         <tr>
                           <th scope="col" class="text-left">NAMA KRITERIA</th>
-                          <th scope="col">Tipe Layar</th>
-                          <th scope="col">Color Gamut</th>
-                          <th scope="col">Harga</th>
-                          <th scope="col">Ukuran Layar</th>
-                          <th scope="col">Bezel Monitor</th>
-                          <th scope="col">Resolusi</th>
+                          <th scope="col">REFRESH RATE</th>
+                          <th scope="col">RESPONSE TIME</th>
+                          <th scope="col">HARGA</th>
+                          <th scope="col">UKURAN LAYAR</th>
+                          <th scope="col">TIPE LAYAR</th>
+                          <th scope="col">RESOLUSI</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
                           <th scope="row" class="text-left">BOBOT</th>
-                          <td>4</td>
-                          <td>4</td>
                           <td>5</td>
                           <td>5</td>
+                          <td>4</td>
+                          <td>4</td>
                           <td>4</td>
                           <td>5</td>
                         </tr>
                         <tr>
                           <th scope="row" class="text-left">ATRIBUT</th>
                           <td>BENEFIT</td>
-                          <td>BENEFIT</td>
                           <td>CONS</td>
+                          <td>BENEFIT</td>
                           <td>BENEFIT</td>
                           <td>BENEFIT</td>
                           <td>BENEFIT</td>
