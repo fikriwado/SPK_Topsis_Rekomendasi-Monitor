@@ -28,7 +28,7 @@
           src="assets/img/undraw_profile.svg"
         />
         <span class="d-none d-lg-inline text-gray-600 small"
-          >Douglas McGee</span
+          ><?= $_SESSION['username']; ?></span
         >
       </a>
       <!-- Dropdown - User Information -->
