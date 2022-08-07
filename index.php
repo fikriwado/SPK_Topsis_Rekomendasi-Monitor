@@ -1,3 +1,11 @@
+<?php
+	require_once('init.php');
+
+  if (!is_login()) {
+    header('Location: login.php');
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>

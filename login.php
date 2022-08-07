@@ -1,8 +1,11 @@
 <?php
-   ob_start();
-   session_start();
-?>
-<?php
+	require_once('init.php');
+
+	if (is_login()) {
+		header('Location: index.php');
+	}
+
+
 	$msg = '';
 
 	if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['password'])){
