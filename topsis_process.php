@@ -10,6 +10,101 @@ $W4    = $_POST['screen_size'];
 $W5    = $_POST['panel_type'];
 $W5    = $_POST['resolution'];
 
+
+// Menentukan nilai bobot alternatif
+function hitungBobot(Array $alternatif)
+{
+    $tipe_panel = $alternatif['tipe_panel'];
+    $harga = $alternatif['harga'];
+    $ukuran_layar = $alternatif['ukuran_layar'];
+    $response_time = $alternatif['response_time'];
+    $refresh_rate = $alternatif['refresh_rate'];
+    $resolusi = $alternatif['resolusi'];
+
+    $tipe_panel_angka = 0;
+    $harga_angka =  0;
+    $ukuran_layar_angka =  0;
+    $response_time_angka =  0;
+    $refresh_rate_angka = 0;
+    $resolusi_angka =  0;
+
+    if ($tipe_panel == 'TFT') {
+        $tipe_panel_angka = 1;
+    } else if ($tipe_panel == 'TN') {
+        $tipe_panel_angka = 2;
+    } else if ($tipe_panel == 'VA') {
+        $tipe_panel_angka = 3;
+    } else if ($tipe_panel == 'IPS') {
+        $tipe_panel_angka = 4;
+    } else if ($tipe_panel == 'OLED') {
+        $tipe_panel_angka = 5;
+    }
+
+    if ($resolusi == 'SD') {
+        $resolusi_angka = 1;
+    } else if ($resolusi == 'HD') {
+        $resolusi_angka = 2;
+    } else if ($resolusi == 'FHD') {
+        $resolusi_angka = 3;
+    } else if ($resolusi == 'QHD') {
+        $resolusi_angka = 4;
+    } else if ($resolusi == 'UHD') {
+        $resolusi_angka = 5;
+    }
+
+
+    if ($harga >= 3500000) {
+        $harga_angka = 1;
+    } else if ($harga >= 3000000 && $harga < 3500000) {
+        $harga_angka = 2;
+    } else if ($harga >= 2500000 && $harga < 3000000) {
+        $harga_angka = 3;
+    } else if ($harga >= 1500000 && $harga < 2500000) {
+        $harga_angka = 4;
+    } else if ($harga < 1500000) {
+        $harga_angka = 5;
+    }
+
+    if ($ukuran_layar < 19) {
+        $ukuran_layar_angka = 1;
+    } else if ($ukuran_layar >= 19 && $ukuran_layar < 22) {
+        $ukuran_layar_angka = 2;
+    } else if ($ukuran_layar >= 22 && $ukuran_layar < 24) {
+        $ukuran_layar_angka = 3;
+    } else if ($ukuran_layar >= 24 && $ukuran_layar < 32) {
+        $ukuran_layar_angka = 4;
+    } else if ($ukuran_layar >= 32) {
+        $ukuran_layar_angka = 5;
+    }
+
+    if ($refresh_rate < 60) {
+        $refresh_rate_angka = 1;
+    } else if ($refresh_rate >= 60 && $refresh_rate < 70) {
+        $refresh_rate_angka = 2;
+    } else if ($refresh_rate >= 70 && $refresh_rate < 144) {
+        $refresh_rate_angka = 3;
+    } else if ($refresh_rate >= 144 && $refresh_rate < 240) {
+        $refresh_rate_angka = 4;
+    } else if ($refresh_rate >= 240) {
+        $refresh_rate_angka = 5;
+    }
+
+    if ($response_time >= 5) {
+        $response_time_angka = 1;
+    } else if ($response_time > 3 && $response_time <= 4) {
+        $response_time_angka = 2;
+    } else if ($response_time > 2 && $response_time <= 3) {
+        $response_time_angka = 3;
+    } else if ($response_time > 1 && $response_time <= 2) {
+        $response_time_angka = 4;
+    } else if ($response_time <= 1) {
+        $response_time_angka = 5;
+    }
+
+
+    return array($tipe_panel_angka, $harga_angka, $ukuran_layar_angka, $refresh_rate_angka, $response_time_angka, $resolusi_angka);
+}
+
 // Mencari Nilai Pembagi
 function calculateDividerValue($matrix)
 {
@@ -91,6 +186,9 @@ function JarakIplus($aplus, $bob)
                     <div class="row">
                         <div class="col-lg-10">
                             <div class="card shadow mb-4">
+                                <div class="card-header">
+                                   Matrik Data Monitor
+                                </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
                                         <table class="table">
@@ -107,10 +205,10 @@ function JarakIplus($aplus, $bob)
                                                         C2 (Cost)
                                                     </th>
                                                     <th>
-                                                        C3 (Cost)
+                                                        C3 (Benefit)
                                                     </th>
                                                     <th>
-                                                        C4 (Benefit)
+                                                        C4 (Cost)
                                                     </th>
                                                     <th>
                                                         C5 (Benefit)
@@ -122,29 +220,141 @@ function JarakIplus($aplus, $bob)
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                $query = mysqli_query($selectdb, "SELECT * FROM tbl_monitor");
+                                                $query = mysqli_query($koneksi, "SELECT * FROM monitor");
                                                 $no = 1;
-                                                while ($data_hp = mysqli_fetch_array($query)) {
-                                                    $Matrik[$no - 1] = array($data_hp['harga_angka'], $data_hp['ram_angka'], $data_hp['memori_angka'], $data_hp['processor_angka'], $data_hp['kamera_angka']);
+                                                while ($data = mysqli_fetch_array($query)) {
+                                                    $nilaiBobot = hitungBobot($data);
+                                                    $Matrik[$no - 1] = $nilaiBobot;
                                                 ?>
                                                     <tr>
                                                         <td>
-                                                            <center><?php echo "A", $no ?></center>
+                                                            <?php echo "A", $no ?>
                                                         </td>
                                                         <td>
-                                                            <center><?php echo $data_hp['harga_angka'] ?></center>
+                                                            <?php echo $nilaiBobot[0] ?>
                                                         </td>
                                                         <td>
-                                                            <center><?php echo $data_hp['ram_angka'] ?></center>
+                                                            <?php echo $nilaiBobot[1] ?>
                                                         </td>
                                                         <td>
-                                                            <center><?php echo $data_hp['memori_angka'] ?></center>
+                                                            <?php echo $nilaiBobot[2] ?>
                                                         </td>
                                                         <td>
-                                                            <center><?php echo $data_hp['processor_angka'] ?></center>
+                                                            <?php echo $nilaiBobot[3] ?>
                                                         </td>
                                                         <td>
-                                                            <center><?php echo $data_hp['kamera_angka'] ?></center>
+                                                            <?php echo $nilaiBobot[4] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $nilaiBobot[5] ?>
+                                                        </td>
+                                                    </tr>
+                                                <?php
+                                                    $no++;
+                                                }
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <div class="card shadow mb-4">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <?php 
+                                                $pembagiNM = calculateDividerValue($Matrik);
+                                            ?>
+                                            <thead style="border-top: 1px solid #d0d0d0;">
+                                                <tr>
+                                                    <th>
+                                                        Nilai Pembagi
+                                                    </th>
+                                                    <th>
+                                                        <?= round($pembagiNM[0], 6) ?>
+                                                    </th>
+                                                    <th>
+                                                        <?= round($pembagiNM[1], 6) ?>
+                                                    </th>
+                                                    <th>
+                                                        <?= round($pembagiNM[2], 6) ?>
+                                                    </th>
+                                                    <th>
+                                                        <?= round($pembagiNM[3], 6) ?>
+                                                    </th>
+                                                    <th>
+                                                        <?= round($pembagiNM[4], 6) ?>
+                                                    </th>
+                                                    <th>
+                                                        <?= round($pembagiNM[5], 6) ?>
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        Alternatif
+                                                    </th>
+                                                    <th>
+                                                        C1 (Benefit)
+                                                    </th>
+                                                    <th>
+                                                        C2 (Cost)
+                                                    </th>
+                                                    <th>
+                                                        C3 (Benefit)
+                                                    </th>
+                                                    <th>
+                                                        C4 (Cost)
+                                                    </th>
+                                                    <th>
+                                                        C5 (Benefit)
+                                                    </th>
+                                                    <th>
+                                                        C6 (Benefit)
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                $query = mysqli_query($koneksi, "SELECT * FROM monitor");
+                                                $no = 1;
+                                                while ($data = mysqli_fetch_array($query)) {
+
+                                                    $nilaiBobotAlternatif = hitungBobot($data);
+                                                    $nilai1 = $nilaiBobotAlternatif[0] / $pembagiNM[0];
+                                                    $nilai2 = $nilaiBobotAlternatif[1] / $pembagiNM[1];
+                                                    $nilai3 = $nilaiBobotAlternatif[2] / $pembagiNM[2];
+                                                    $nilai4 = $nilaiBobotAlternatif[3] / $pembagiNM[3];
+                                                    $nilai5 = $nilaiBobotAlternatif[4] / $pembagiNM[4];
+                                                    $nilai6 = $nilaiBobotAlternatif[5] / $pembagiNM[5];
+                                                    $MatrikNormalisasi[$no - 1] = array($nilai1, $nilai2, $nilai3, $nilai4, $nilai5, $nilai6);
+
+                                                ?>
+                                                    <tr>
+                                                        <td>
+                                                            <?php echo "A", $no ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo round($nilai1, 6) ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo round($nilai2, 6) ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo round($nilai3, 6) ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo round($nilai4, 6) ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo round($nilai5, 6) ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo round($nilai6, 6) ?>
                                                         </td>
                                                     </tr>
                                                 <?php
