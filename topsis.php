@@ -31,21 +31,12 @@
                                 <div class="card-body">
                                     <form method="POST" action="topsis_process.php">
                                         <div class="mb-3">
-                                            <label for="refreshRate">Refresh Rate</label><select class="form-control" id="refreshRate" name="refresh_rate">
-                                                <option value="1">< 60Hz</option>
-                                                <option value="2">60Hz - 70Hz</option>
-                                                <option value="3">70Hz - 144Hz</option>
-                                                <option value="4">144Hz - 240Hz</option>
-                                                <option value="5">>= 240Hz</option>
-                                            </select>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="responseTime">Response Time</label><select class="form-control" id="responseTime" name="response_time">
-                                                <option value="1">>= 5ms</option>
-                                                <option value="2">4ms</option>
-                                                <option value="3">3ms</option>
-                                                <option value="4">2ms</option>
-                                                <option value="5"><= 1ms</option>
+                                            <label for="panelType">Tipe Panel Layar</label><select class="form-control" id="panelType" name="panel_type">
+                                                <option value="1">TFT</option>
+                                                <option value="2">TN</option>
+                                                <option value="3">VA</option>
+                                                <option value="4">IPS</option>
+                                                <option value="5">OLED</option>
                                             </select>
                                         </div>
                                         <div class="mb-3">
@@ -67,12 +58,21 @@
                                             </select>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="panelType">Tipe Panel Layar</label><select class="form-control" id="panelType" name="panel_type">
-                                                <option value="1">TFT</option>
-                                                <option value="2">TN</option>
-                                                <option value="3">VA</option>
-                                                <option value="4">IPS</option>
-                                                <option value="5">OLED</option>
+                                            <label for="refreshRate">Refresh Rate</label><select class="form-control" id="refreshRate" name="refresh_rate">
+                                                <option value="1">< 60Hz</option>
+                                                <option value="2">60Hz - 70Hz</option>
+                                                <option value="3">70Hz - 144Hz</option>
+                                                <option value="4">144Hz - 240Hz</option>
+                                                <option value="5">>= 240Hz</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="responseTime">Response Time</label><select class="form-control" id="responseTime" name="response_time">
+                                                <option value="1">>= 5ms</option>
+                                                <option value="2">4ms</option>
+                                                <option value="3">3ms</option>
+                                                <option value="4">2ms</option>
+                                                <option value="5"><= 1ms</option>
                                             </select>
                                         </div>
                                         <div class="mb-3">

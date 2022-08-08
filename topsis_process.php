@@ -3,16 +3,16 @@ session_start();
 include('koneksi.php');
 
 //Bobot
-$W1    = $_POST['refresh_rate'];
-$W2    = $_POST['response_time'];
-$W3    = $_POST['price'];
-$W4    = $_POST['screen_size'];
-$W5    = $_POST['panel_type'];
-$W5    = $_POST['resolution'];
+$W1    = $_POST['panel_type'];
+$W2    = $_POST['price'];
+$W3    = $_POST['screen_size'];
+$W4    = $_POST['refresh_rate'];
+$W5    = $_POST['response_time'];
+$W6    = $_POST['resolution'];
 
 
 // Menentukan nilai bobot alternatif
-function hitungBobot(Array $alternatif)
+function hitungBobot(array $alternatif)
 {
     $tipe_panel = $alternatif['tipe_panel'];
     $harga = $alternatif['harga'];
@@ -178,7 +178,7 @@ function JarakIplus($aplus, $bob)
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col">
-                            <h1 class="h3 mb-4 text-gray-800">Masukan Bobot Kriteria</h1>
+                            <h1 class="h3 mb-4 text-gray-800">Hasil Perhitungan Dengan Metode Topsis</h1>
                         </div>
                     </div>
 
@@ -187,7 +187,7 @@ function JarakIplus($aplus, $bob)
                         <div class="col-lg-10">
                             <div class="card shadow mb-4">
                                 <div class="card-header">
-                                   Matrik Data Monitor
+                                    Matrik Data Monitor
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -264,11 +264,12 @@ function JarakIplus($aplus, $bob)
                     <div class="row">
                         <div class="col-lg-10">
                             <div class="card shadow mb-4">
+                                <div class="card-header">Matrik Ternormalisasi</div>
                                 <div class="card-body">
                                     <div class="table-responsive">
                                         <table class="table">
-                                            <?php 
-                                                $pembagiNM = calculateDividerValue($Matrik);
+                                            <?php
+                                            $pembagiNM = calculateDividerValue($Matrik);
                                             ?>
                                             <thead style="border-top: 1px solid #d0d0d0;">
                                                 <tr>
@@ -368,7 +369,384 @@ function JarakIplus($aplus, $bob)
                             </div>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <div class="card shadow mb-4">
+                                <div class="card-header">Bobot (W)</div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        (W) Tipe Panel
+                                                    </th>
+                                                    <th>
+                                                        (W) Harga
+                                                    </th>
+                                                    <th>
+                                                        (W) Ukuran Layar
+                                                    </th>
+                                                    <th>
+                                                        (W) Refresh Rate
+                                                    </th>
+                                                    <th>
+                                                        (W) Response Time
+                                                    </th>
+                                                    <th>
+                                                        (W) Resolusi
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!--count($W)-->
+                                                <tr>
+                                                    <td>
+                                                        <?php echo ($W1); ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo ($W2); ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo ($W3); ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo ($W4); ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo ($W5); ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo ($W6); ?>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <div class="card shadow mb-4">
+                                <div class="card-header">Matriks Normalisasi terBobot "Y"</div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead style="border-top: 1px solid #d0d0d0;">
+                                                <tr>
+                                                    <th>
+                                                        Alternatif
+                                                    </th>
+                                                    <th>
+                                                        C1 (Benefit)
+                                                    </th>
+                                                    <th>
+                                                        C2 (Cost)
+                                                    </th>
+                                                    <th>
+                                                        C3 (Benefit)
+                                                    </th>
+                                                    <th>
+                                                        C4 (Cost)
+                                                    </th>
+                                                    <th>
+                                                        C5 (Benefit)
+                                                    </th>
+                                                    <th>
+                                                        C6 (Benefit)
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                $query = mysqli_query($koneksi, "SELECT * FROM monitor");
+                                                $no = 1;
+                                                while ($data = mysqli_fetch_array($query)) {
+
+                                                    $NormalisasiBobot[$no - 1] = array(
+                                                        $MatrikNormalisasi[$no - 1][0] * $W1,
+                                                        $MatrikNormalisasi[$no - 1][1] * $W2,
+                                                        $MatrikNormalisasi[$no - 1][2] * $W3,
+                                                        $MatrikNormalisasi[$no - 1][3] * $W4,
+                                                        $MatrikNormalisasi[$no - 1][4] * $W5,
+                                                        $MatrikNormalisasi[$no - 1][5] * $W6
+                                                    );
+
+                                                ?>
+                                                    <tr>
+                                                        <td>
+                                                            <?= "A", $no ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= round($MatrikNormalisasi[$no - 1][0] * $W1, 6) ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= round($MatrikNormalisasi[$no - 1][1] * $W2, 6) ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= round($MatrikNormalisasi[$no - 1][2] * $W3, 6) ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= round($MatrikNormalisasi[$no - 1][3] * $W4, 6) ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= round($MatrikNormalisasi[$no - 1][4] * $W5, 6) ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= round($MatrikNormalisasi[$no - 1][5] * $W5, 6) ?>
+                                                        </td>
+                                                    </tr>
+                                                <?php
+                                                    $no++;
+                                                }
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <div class="card shadow mb-4">
+                                <div class="card-header">Matrik Solusi ideal positif "A+" dan negatif "A-"</div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead style="border-top: 1px solid #d0d0d0;">
+                                                <tr>
+                                                    <th>
+
+                                                    </th>
+                                                    <th>
+                                                        Y1 (Benefit)
+                                                    </th>
+                                                    <th>
+                                                        Y2 (Cost)
+                                                    </th>
+                                                    <th>
+                                                        Y3 (Benefit)
+                                                    </th>
+                                                    <th>
+                                                        Y4 (Cost)
+                                                    </th>
+                                                    <th>
+                                                        Y5 (Benefit)
+                                                    </th>
+                                                    <th>
+                                                        Y6 (Benefit)
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                $NormalisasiBobotTrans = Transpose($NormalisasiBobot);
+                                                ?>
+                                                <tr>
+                                                    <?php
+                                                    $solusiIdeal1 = max($NormalisasiBobotTrans[0]);
+                                                    $solusiIdeal2 = min($NormalisasiBobotTrans[1]);
+                                                    $solusiIdeal3 = max($NormalisasiBobotTrans[2]);
+                                                    $solusiIdeal4 = min($NormalisasiBobotTrans[3]);
+                                                    $solusiIdeal5 = max($NormalisasiBobotTrans[4]);
+                                                    $solusiIdeal6 = max($NormalisasiBobotTrans[5]);
+                                                    $idealpositif = array($solusiIdeal1, $solusiIdeal2, $solusiIdeal3, $solusiIdeal4, $solusiIdeal5, $solusiIdeal6);
+                                                    ?>
+                                                    <td>
+                                                        <?= "Y+" ?>
+                                                    </td>
+                                                    <td>
+                                                        <?= (round($solusiIdeal1, 6)); ?>&nbsp(max)
+                                                    </td>
+                                                    <td>
+                                                        <?= (round($solusiIdeal2, 6)); ?>&nbsp(min)
+                                                    </td>
+                                                    <td>
+                                                        <?= (round($solusiIdeal3, 6)); ?>&nbsp(max)
+                                                    </td>
+                                                    <td>
+                                                        <?= (round($solusiIdeal4, 6)); ?>&nbsp(min)
+                                                    </td>
+                                                    <td>
+                                                        <?= (round($solusiIdeal5, 6)); ?>&nbsp(max)
+                                                    </td>
+                                                    <td>
+                                                        <?= (round($solusiIdeal6, 6)); ?>&nbsp(max)
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <?php
+                                                    $solusiIdeal1 = min($NormalisasiBobotTrans[0]);
+                                                    $solusiIdeal2 = max($NormalisasiBobotTrans[1]);
+                                                    $solusiIdeal3 = min($NormalisasiBobotTrans[2]);
+                                                    $solusiIdeal4 = max($NormalisasiBobotTrans[3]);
+                                                    $solusiIdeal5 = min($NormalisasiBobotTrans[4]);
+                                                    $solusiIdeal6 = min($NormalisasiBobotTrans[5]);
+                                                    $idealnegatif = array($solusiIdeal1, $solusiIdeal2, $solusiIdeal3, $solusiIdeal4, $solusiIdeal5, $solusiIdeal6);
+                                                    ?>
+                                                    <td>
+                                                        <?= "Y-" ?>
+                                                    </td>
+                                                    <td>
+                                                        <?= (round($solusiIdeal1, 6)); ?>&nbsp(min)
+                                                    </td>
+                                                    <td>
+                                                        <?= (round($solusiIdeal2, 6)); ?>&nbsp(max)
+                                                    </td>
+                                                    <td>
+                                                        <?= (round($solusiIdeal3, 6)); ?>&nbsp(min)
+                                                    </td>
+                                                    <td>
+                                                        <?= (round($solusiIdeal4, 6)); ?>&nbsp(max)
+                                                    </td>
+                                                    <td>
+                                                        <?= (round($solusiIdeal5, 6)); ?>&nbsp(min)
+                                                    </td>
+                                                    <td>
+                                                        <?= (round($solusiIdeal6, 6)); ?>&nbsp(min)
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <div class="card shadow mb-4">
+                                <div class="card-header">Jarak antara nilai terbobot setiap alternatif terhadap solusi ideal positif</div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead style="border-top: 1px solid #d0d0d0;">
+                                                <tr>
+                                                    <th colspan="2">D+</th>
+                                                    <th colspan="2">D-</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                $query = mysqli_query($koneksi, "SELECT * FROM monitor");
+                                                $no = 1;
+                                                $Dplus = JarakIplus($idealpositif, $NormalisasiBobot);
+                                                $Dmin = JarakIplus($idealnegatif, $NormalisasiBobot);
+                                                while ($data = mysqli_fetch_array($query)) {
+
+                                                ?>
+                                                    <tr>
+                                                        <td><?php echo "D", $no ?></td>
+                                                        <td><?php echo round($Dplus[$no - 1], 6) ?></td>
+                                                        <td><?php echo "D", $no ?></td>
+                                                        <td><?php echo round($Dmin[$no - 1], 6) ?></td>
+                                                    </tr>
+                                                <?php
+                                                    $no++;
+                                                }
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <div class="card shadow mb-4">
+                                <div class="card-header">Nilai Preferensi untuk Setiap alternatif (V)</div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead style="border-top: 1px solid #d0d0d0;">
+                                                <tr>
+                                                    <th>Nilai Preferensi "V"</th>
+                                                    <th>Nilai</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                $query = mysqli_query($koneksi, "SELECT * FROM monitor");
+                                                $no = 1;
+                                                $nilaiV = array();
+                                                while ($data = mysqli_fetch_array($query)) {
+
+                                                    array_push($nilaiV, $Dmin[$no - 1] / ($Dmin[$no - 1] + $Dplus[$no - 1]));
+                                                ?>
+                                                    <tr>
+                                                        <td><?php echo "V", $no ?></td>
+                                                        <td><?php echo $Dmin[$no - 1] / ($Dmin[$no - 1] + $Dplus[$no - 1]); ?></td>
+                                                    </tr>
+                                                <?php
+                                                    $no++;
+                                                }
+
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <div class="card shadow mb-4">
+                                <div class="card-header">Nilai Preferensi tertinggi</div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead style="border-top: 1px solid #d0d0d0;">
+													<tr>
+														<th>Nilai Preferensi tertinggi</th>
+														<th></th>
+														<th>Alternatif Tipe Monitor terpilih</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<?php
+														$testmax = max($nilaiV);
+														for ($i=0; $i < count($nilaiV); $i++) { 
+															if ($nilaiV[$i] == $testmax) {
+																$query=mysqli_query($koneksi,"SELECT * FROM monitor where id = $i+1");
+																?>
+																<td><?php echo "V".($i+1); ?></td>
+																<td><?php echo $nilaiV[$i]; ?></td>
+																<?php while ($data=mysqli_fetch_array($query)) { ?>
+																<td><?php echo $data['tipe']; ?></td>
+																<?php
+															}
+														}
+													} ?>
+												</tr>
+											</tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
                 </div>
+
 
 
 
