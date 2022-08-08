@@ -43,7 +43,7 @@
   
   <!-- Nav Item -->
   <li class="nav-item">
-    <a class="nav-link" href="#">
+    <a class="nav-link" href="monitor.php">
       <i class="fas fa-desktop"></i>
       <span>Data Monitor</span></a
     >
