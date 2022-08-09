@@ -43,19 +43,25 @@
                     </h6>
                   </div>
                   <div class="card-body">
+                    <a href="monitor_add.php">
+                      <button class="btn btn-primary btn-icon right" type="button">
+											  Tambah Monitor
+                      </button>
+                    </a>
+                    <br><br>
                     <table class="table table-bordered text-center">
                       <thead>
                         <tr>
-                          <th scope="col" class="text-left">ID</th>
-                          <th scope="col">MERK</th>
-                          <th scope="col" width="20%">TIPE</th>
-                          <th scope="col">TIPE LAYAR</th>
-                          <th scope="col">HARGA</th>
-                          <th scope="col">UKURAN LAYAR</th>
-                          <th scope="col">RESPONSE TIME</th>
-                          <th scope="col">REFRESH RATE</th>
-                          <th scope="col">RESOLUSI</th>
-													<th scope="col" width="20%">ACTION</th>
+                          <th scope="col" width="8%" class="text-left">ID</th>
+                          <th scope="col" width="8%">MERK</th>
+                          <th scope="col" width="8%">TIPE</th>
+                          <th scope="col" width="8%">TIPE LAYAR</th>
+                          <th scope="col" width="8%">HARGA</th>
+                          <th scope="col" width="8%">UKURAN LAYAR</th>
+                          <th scope="col" width="8%">RESPONSE TIME</th>
+                          <th scope="col" width="8%">REFRESH RATE</th>
+                          <th scope="col" width="8%">RESOLUSI</th>
+													<th width="28%">ACTION</th>
                         </tr>
                       </thead>
                       <tbody>
