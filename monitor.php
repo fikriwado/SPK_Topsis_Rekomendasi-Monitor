@@ -85,11 +85,12 @@
 																		<td>".$data['refresh_rate']."</td>
 																		<td>".$data['resolusi']."</td>";?>
 																		<td>
-																			<button class="btn btn-primary btn-icon" type="button">
+																			<a href="monitor_edit.php?id=<?=$data['id'];?>"><button class="btn btn-primary btn-icon" type="submit" name="edit" value="<?=$data['id'];?>">
 																			<i class="fas fa-edit"></i></button>
-																			<button class="btn btn-danger btn-icon" type="button">
-																			<i class="fas fa-trash"></i></button>
-
+                                      <form id="sendIdDelete" action="monitor_delete.php" method="post">
+                                        <button onclick="confirmAction()" class="btn btn-danger btn-icon" type="submit" name="delete" value="<?=$data['id'];?>">
+                                        <i class="fas fa-trash"></i></button>
+                                      </form>
 																		</td>
 																</tr><?php
                               ;
@@ -138,5 +139,14 @@
 
     <!-- Custom scripts for all pages-->
     <script src="assets/js/sb-admin-2.min.js"></script>
+    <script>
+      // The function below will start the confirmation dialog
+      function confirmAction() {
+        let confirmAction = confirm("Apakah Anda yakin akan menghapus data?");
+        if (confirmAction) {
+          document.getElementById("sendIdDelete").submit();
+        }
+      }
+    </script>
   </body>
 </html>
