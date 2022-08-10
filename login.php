@@ -19,7 +19,6 @@
 		$sql 		= "SELECT * FROM auth WHERE username = '$username' AND password = '$password'";
 
 		$result = mysqli_query($koneksi, $sql);
-		$row 		= mysqli_fetch_array($result,MYSQLI_ASSOC);
 		$count 	= mysqli_num_rows($result);
 
 		if ($count > 0) {
