@@ -1,3 +1,3 @@
 <?php
 
-$koneksi = mysqli_connect('localhost','root','admin123','spkdb') or die('Error koneksi');
+$koneksi = mysqli_connect('localhost','root','','spkdb') or die('Error koneksi');
