@@ -33,9 +33,11 @@
 							";
 		echo $sql;
 		$result = mysqli_query($koneksi,$sql);
-	}
-	
 
+        if ($result){
+            header('Location: monitor.php');
+        }
+	}
 ?>
 
 <!DOCTYPE html>
@@ -63,20 +65,18 @@
                             <h1 class="h3 mb-4 text-gray-800">Tambah Data Monitor</h1>
                         </div>
                     </div>
-
-
                     <div class="row">
                         <div class="col-lg-10">
                             <div class="card shadow mb-4">
                                 <div class="card-body">
                                     <form method="POST" action="#">
-																				<div class="mb-3">
+										<div class="mb-3">
                                             <label for="merk">Merk</label>
-																						<input class="form-control" id="merk" name="merk" type="text" required>
+											<input class="form-control" id="merk" name="merk" type="text" required>
                                         </div>
-																				<div class="mb-3">
+										<div class="mb-3">
                                             <label for="tipe">Tipe</label>
-																						<input class="form-control" id="tipe" name="tipe" type="text" required>
+											<input class="form-control" id="tipe" name="tipe" type="text" required>
                                         </div>
                                         <div class="mb-3">
                                             <label for="panelType">Tipe Panel Layar</label><select class="form-control" id="panelType" name="panel_type">
@@ -89,13 +89,11 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="price">Harga</label>
-																						<input class="form-control" id="price" name="price" type="number" required>
-                                            </select>
+											<input class="form-control" id="price" name="price" type="number" required>
                                         </div>
                                         <div class="mb-3">
                                             <label for="screenSize">Ukuran Layar</label>
-																						<input class="form-control" id="screenSize" name="screen_size" type="number" required>
-                                            </select>
+                                            <input class="form-control" id="screenSize" name="screen_size" type="number" required>
                                         </div>
                                         <div class="mb-3">
                                             <label for="refreshRate">Refresh Rate</label>
@@ -124,10 +122,6 @@
                     </div>
                 </div>
 
-
-
-
-
                 <?php @include('partials/footer.php'); ?>
             </div>
             <!-- End of Content Wrapper -->
@@ -145,5 +139,4 @@
         <!-- Custom scripts for all pages-->
         <script src="assets/js/sb-admin-2.min.js"></script>
 </body>
-
 </html>
