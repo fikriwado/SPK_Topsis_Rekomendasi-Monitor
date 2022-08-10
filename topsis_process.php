@@ -1,5 +1,11 @@
 <?php
-session_start();
+
+require_once('init.php');
+
+if (!is_login()) {
+    header('Location: login.php');
+}
+
 include('koneksi.php');
 
 //Bobot
